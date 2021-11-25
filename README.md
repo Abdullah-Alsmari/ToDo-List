@@ -1,5 +1,8 @@
 # ToDo_List
 
+<img src="https://user-images.githubusercontent.com/92260200/143501586-1ab8ad33-ff57-4a11-abe5-ab221b7f4a5f.png" alt="Screenshot" width="200"/>
+
+
 An easy-to-use customizable notes application powered with room database
 
 # Features
