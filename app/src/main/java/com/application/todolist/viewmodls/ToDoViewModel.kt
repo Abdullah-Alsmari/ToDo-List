@@ -36,7 +36,7 @@ class ToDoViewModel : ViewModel() {
         title.value=t.title
         subtitle.value=t.subTitle
         note.value=t.notes
-        date.value=t.date
+        date.value=t.date.toString()
 
     }
 

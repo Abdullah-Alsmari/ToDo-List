@@ -2,6 +2,7 @@ package com.application.todolist.ui
 
 import android.os.Bundle
 import android.view.View
+import android.widget.CheckBox
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -57,6 +58,11 @@ class HomeFragmnent : Fragment(R.layout.fragment_home_fragmnent), OnCardClicked 
         val bundle = Bundle()
         bundle.putInt("position",position)
         Navigation.findNavController(requireView()).navigate(R.id.action_homeFragmnent_to_createToDoTask,bundle)
+        toDoAdapter.notifyDataSetChanged()
+    }
+
+    override fun onCheckboxClicked(toDoModel: ToDoModel,checkBox: CheckBox) {
+        toDoModel.isChecked = checkBox.isChecked
         toDoAdapter.notifyDataSetChanged()
     }
 }

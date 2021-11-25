@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="todoModel"
             type="com.application.todolist.datasource.ToDoModel" />
@@ -18,53 +19,53 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardview"
-        android:onClick="@{()-> onCardClicked.onEdit(position,todoModel)}"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_margin="10dp"
+        android:onClick="@{()-> onCardClicked.onEdit(position,todoModel)}"
+        app:cardColor="@{todoModel.checked}"
         app:cardCornerRadius="10dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
 
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
 
 
             <TextView
                 android:id="@+id/ivImage"
+                android:layout_below="@+id/notes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="10sp"
-
-                android:text="@{todoModel.date}"
-                android:textColor="#777676"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/black"
                 android:textSize="16sp"
-                android:textStyle="bold" />
+                app:showDate="@{todoModel.date}" />
 
             <TextView
                 android:id="@+id/tvWork"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_toEndOf="@+id/ivImage"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="8dp"
+                android:textStyle="bold"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="@{todoModel.title}"
                 android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tvWork"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_toEndOf="@+id/ivImage"
+                android:id="@+id/notes"
+                android:layout_marginStart="10dp"
                 android:text="@{todoModel.notes}"
-                android:textColor="#c4C4c4"
-                android:textSize="15sp" />
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                />
 
             <CheckBox
                 android:id="@+id/ivCheckBox"
@@ -73,9 +74,11 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="8dp"
+                android:checked="@{todoModel.checked}"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
+                android:onClick="@{()-> onCardClicked.onCheckboxClicked(todoModel,ivCheckBox)}"
                 android:src="@drawable/ic_baseline_check_box_24" />
 
             <ImageView
