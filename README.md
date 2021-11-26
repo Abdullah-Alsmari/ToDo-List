@@ -19,6 +19,16 @@ An easy-to-use customizable notes application powered with room database
 - View Models
 - Data Binding
 
+<img width="350" alt="Screen Shot 2021-11-26 at 8 50 02 AM" src="https://user-images.githubusercontent.com/92260200/143533567-0351069e-2957-4624-b0bf-a84b26a5f2d6.png"><img width="350" alt="Screen Shot 2021-11-26 at 8 51 05 AM" src="https://user-images.githubusercontent.com/92260200/143533570-85b10d47-6d2e-4cde-aa4b-13dc5b3ed71e.png">
+
+
+
+
+
+
+
+
+
 # References
 
 - https://developer.android.com/training/data-storage/room
