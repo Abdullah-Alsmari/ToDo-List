@@ -28,7 +28,7 @@ fun setDate(textView: TextView, date: Long) {
 @BindingAdapter("cardColor")
 fun setCardBackgroundColor(cardView: CardView, isChecked: Boolean) {
     if (isChecked)
-        cardView.setCardBackgroundColor(Color.parseColor("#7CFC00"))
+        cardView.setCardBackgroundColor(Color.parseColor("#45B39D"))
     else
         cardView.setCardBackgroundColor(Color.parseColor("#FFFFFF"))
 
