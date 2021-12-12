@@ -8,10 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.navArgs
+import com.application.todolist.MyApplication
 import com.application.todolist.R
+import com.application.todolist.ToDoEntity
 import com.application.todolist.databinding.FragmentCreateToDoTaskBinding
 import com.application.todolist.datasource.ToDoModel
 import com.application.todolist.viewmodls.ToDoViewModel
@@ -22,13 +26,22 @@ import java.util.*
 class CreateToDoTask : Fragment() {
 
     private var cal = Calendar.getInstance()
-    val toDOViewModel: ToDoViewModel by viewModels()
     private val dateFormat = SimpleDateFormat("dd/MM/yyyy")
     private lateinit var datePicker: DatePickerDialog.OnDateSetListener
-    private var millis: Long =0
+    private var millis: Long = 0
     var currentDataPos = 0
+    private var editItem: ToDoEntity? = null
+
 
     var bind: FragmentCreateToDoTaskBinding? = null
+
+    // Use the 'by activityViewModels()' Kotlin property delegate from the fragment-ktx artifact
+    // to share the ViewModel across fragments.
+    private val toDoViewModel: ToDoViewModel by activityViewModels {
+        ToDoViewModel.ToDoViewModelFactory(
+            (activity?.application as MyApplication).database.toDoDao()
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,26 +61,32 @@ class CreateToDoTask : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         datePickerDialog()
+        try {
+            val args: CreateToDoTaskArgs by navArgs()
+            if (args.data != null) {
+                populateDataForEditingTask(args.data!!)
+                editItem = args.data
+            }
+        } catch (e: Exception) {
 
-        val args = arguments
-        args?.let {
-            currentDataPos = it.getInt("position")!!
-
-            toDOViewModel.diplay(currentDataPos)
         }
+
         bind?.apply {
 
             lifecycleOwner = viewLifecycleOwner
-            viewModel = toDOViewModel
+            viewModel = toDoViewModel
         }
         btnDoneNotes.setOnClickListener {
-            if (args != null) {
+            if (editItem != null) {
+                // editing task
                 val title = etTitle.text.toString()
                 val subTitle = etsubTitle.text.toString()
                 val toDoDate = tvDate.text.toString()
                 val desc = etTakenotes.text.toString()
-                val toDoModel = ToDoModel(title, subTitle, millis, desc)
-                toDOViewModel.createResponse().set(args.getInt("position"), toDoModel)
+                val toDoModel =
+                    ToDoEntity(title, subTitle, millis, desc, editItem!!.checked, editItem!!.id)
+//                toDOViewModel.createResponse().set(args.getInt("position"), toDoModel)
+                toDoViewModel.updateItem(toDoModel)
                 Navigation.findNavController(it)
                     .navigate(R.id.action_createToDoTask_to_homeFragmnent)
             } else {
@@ -75,8 +94,10 @@ class CreateToDoTask : Fragment() {
                 val subTitle = etsubTitle.text.toString()
                 val toDoDate = tvDate.text.toString()
                 val desc = etTakenotes.text.toString()
-                val toDoModel = ToDoModel(title, subTitle, millis, desc)
-                toDOViewModel.createResponse().add(toDoModel)
+                val toDoModel = ToDoEntity(title, subTitle, millis, desc)
+//                toDOViewModel.createResponse().add(toDoModel)
+                toDoViewModel.addNewTask(toDoModel)
+
                 Navigation.findNavController(it)
                     .navigate(R.id.action_createToDoTask_to_homeFragmnent)
             }
@@ -99,5 +120,19 @@ class CreateToDoTask : Fragment() {
             millis = cal.timeInMillis
 
         }
+    }
+
+    private fun populateDataForEditingTask(item: ToDoEntity) {
+        toDoViewModel.title.value = item.title
+        toDoViewModel.subtitle.value = item.subtitle
+        toDoViewModel.note.value = item.description
+        setDateFromMilliseconds(item.date)
+
+    }
+
+    private fun setDateFromMilliseconds(date: Long) {
+        val formatter = SimpleDateFormat("dd/MM/yyyy");
+        val dateString = formatter.format(Date(date))
+        bind!!.tvDate.setText(dateString)
     }
 }

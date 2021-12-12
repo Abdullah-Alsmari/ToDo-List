@@ -19,8 +19,14 @@
         android:name="com.application.todolist.ui.CreateToDoTask"
         android:label="fragment_create_to_do_task"
         tools:layout="@layout/fragment_create_to_do_task" >
-        <action
+
+          <action
             android:id="@+id/action_createToDoTask_to_homeFragmnent"
             app:destination="@id/homeFragmnent" />
+        <argument
+            android:name="data"
+            app:nullable="true"
+            app:argType="com.application.todolist.ToDoEntity"/>
+
     </fragment>
 </navigation>

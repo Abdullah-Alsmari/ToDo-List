@@ -6,11 +6,12 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.application.todolist.R
+import com.application.todolist.ToDoEntity
 import com.application.todolist.databinding.ItemLayoutBinding
 import com.application.todolist.datasource.ToDoModel
 
 class ToDoAdapter(
-    private val toDoModelList: List<ToDoModel>,
+    private val toDoModelList: List<ToDoEntity>,
     private val onCardClicked: OnCardClicked
 ) : RecyclerView.Adapter<ToDoViewHolder>() {
 
@@ -36,7 +37,7 @@ class ToDoViewHolder(
     private val binding: ItemLayoutBinding,
     private val onCardClicked: OnCardClicked
 ) : RecyclerView.ViewHolder(binding.root) {
-    fun onBind(toDoModel: ToDoModel) {
+    fun onBind(toDoModel: ToDoEntity) {
         binding.todoModel = toDoModel // whatever data is coming from the database put it directly into the itemLayout
         binding.position = adapterPosition
         binding.onCardClicked = onCardClicked
