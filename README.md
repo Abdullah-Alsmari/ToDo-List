@@ -13,13 +13,19 @@ An easy-to-use customizable notes application powered with room database
 
 # Components Used
 
-- Room database
+
+ database
 - Recycler View
 - Single acitvity architecture with Jetpack navigation component
 - View Models
 - Data Binding
 
-<img width="350" alt="Screen Shot 2021-11-26 at 8 50 02 AM" src="https://user-images.githubusercontent.com/92260200/143533567-0351069e-2957-4624-b0bf-a84b26a5f2d6.png"><img width="350" alt="Screen Shot 2021-11-26 at 8 51 05 AM" src="https://user-images.githubusercontent.com/92260200/143533570-85b10d47-6d2e-4cde-aa4b-13dc5b3ed71e.png">
+
+
+-<img width="330" alt="Screen Shot 2021-12-13 at 9 24 10 AM" src="https://user-images.githubusercontent.com/92260200/146131104-7659f47c-dbd3-483c-a8ce-9daf189f8caf.png"><img width="330" alt="Screen Shot 2021-12-13 at 9 24 14 AM" src="https://user-images.githubusercontent.com/92260200/146131082-a2ad8846-c639-4b90-a959-b330c36c7a2b.png">
+
+<img width="330" alt="Screen Shot 2021-12-13 at 9 21 28 AM" src="https://user-images.githubusercontent.com/92260200/146131123-d1c1d970-84ce-49c2-8c53-2f36b046c8b0.png">
+
 
 
 
